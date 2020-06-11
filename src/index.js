@@ -1,3 +1,2 @@
-const post = new Post("Webpack Post Title");
-
-console.log("Post to String:", post.toString());
+const post = new Post('Webpack Post Title');
+import './styles/sass.scss';
