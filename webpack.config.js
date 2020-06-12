@@ -85,14 +85,14 @@ const plugins = () => {
             },
         }),
         new CleanWebpackPlugin(),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, 'src/favicon.ico'),
-                    to: path.resolve(__dirname, 'dist'),
-                },
-            ],
-        }),
+        // new CopyWebpackPlugin({
+        //     patterns: [
+        //         {
+        //             from: path.resolve(__dirname, 'src/favicon.ico'),
+        //             to: path.resolve(__dirname, 'dist'),
+        //         },
+        //     ],
+        // }),
         new MiniCssExtractPlugin({
             filename: filename('css'),
         }),
@@ -110,7 +110,6 @@ module.exports = {
     mode: 'development',
     entry: {
         main: ['@babel/polyfill', './index.jsx'],
-        analytics: './analytics.ts',
     },
     output: {
         filename: filename('js'),
@@ -136,10 +135,10 @@ module.exports = {
                 test: /\.css$/,
                 use: cssLoaders(),
             },
-            {
-                test: /\.less$/,
-                use: cssLoaders('less-loader'),
-            },
+            // {
+            //     test: /\.less$/,
+            //     use: cssLoaders('less-loader'),
+            // },
             {
                 test: /\.s[ac]ss$/,
                 use: cssLoaders('sass-loader'),
