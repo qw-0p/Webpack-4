@@ -21,6 +21,18 @@ module.exports = {
         path: PATHS.dist,
         publicPath: '/'
     },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    name: 'vendors',
+                    test: /node_modules/,
+                    chunks: 'all',
+                    enforce: true
+                }
+            }
+        }
+    },
     module: {
         rules: [
             {
@@ -99,7 +111,6 @@ module.exports = {
             filename: `${PATHS.assets}css/[name].css`
         }),
         new HtmlWebpackPlugin({
-            hash: false,
             template: `${PATHS.src}/index.html`,
             filename: './index.html'
         }),
