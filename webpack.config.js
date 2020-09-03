@@ -77,7 +77,7 @@ module.exports = {
     },
     devServer: {
         overlay: true,
-        port: 4400
+        port: 8081
     },
     plugins: [
         new MiniCssExtractPlugin({
