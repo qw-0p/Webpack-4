@@ -43,6 +43,13 @@ module.exports = {
                 }
             },
             {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]'
+                }
+            },
+            {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: '/node_modules/'
@@ -91,7 +98,7 @@ module.exports = {
                         options: {
                             sourceMap: true,
                             config: {
-                                path: 'postcss.config.js'
+                                path: './postcss.config.js'
                             }
                         }
                     },
@@ -117,8 +124,12 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: `${PATHS.src}/img`,
+                    from: `${PATHS.src}/${PATHS.assets}/img`,
                     to: `${PATHS.assets}img`
+                },
+                {
+                    from: `${PATHS.src}/${PATHS.assets}/fonts`,
+                    to: `${PATHS.assets}fonts`
                 },
                 {
                     from: `${PATHS.src}/static`,
