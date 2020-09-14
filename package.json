@@ -8,6 +8,10 @@
         "dev": "cross-env NODE_ENV=development webpack --mode  development",
         "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open"
     },
+    "browserslist": [
+        "> 1%",
+        "last 4 versions"
+    ],
     "keywords": [
         "js",
         "javascript",
@@ -23,12 +27,15 @@
         "@babel/preset-env": "^7.10.2",
         "@babel/preset-react": "^7.10.1",
         "@babel/preset-typescript": "^7.10.1",
+        "autoprefixer": "^9.8.6",
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.1.0",
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^6.0.2",
         "cross-env": "^7.0.2",
         "css-loader": "^3.5.3",
+        "css-mqpacker": "^7.0.0",
+        "cssnano": "^4.1.10",
         "csv-loader": "^3.0.3",
         "eslint": "^7.2.0",
         "eslint-loader": "^4.0.2",
@@ -39,6 +46,7 @@
         "node-sass": "^4.14.1",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
         "papaparse": "^5.2.0",
+        "postcss-loader": "^4.0.1",
         "sass": "^1.26.8",
         "sass-loader": "^8.0.2",
         "style-loader": "^1.2.1",
@@ -51,7 +59,7 @@
     },
     "dependencies": {
         "jquery": "^3.5.1",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.20",
         "normalize.css": "^8.0.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1"

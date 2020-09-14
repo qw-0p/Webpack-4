@@ -35,7 +35,9 @@ const cssLoaders = (extra) => {
                 reloadAll: true
             }
         },
-        'css-loader'
+
+        'css-loader',
+        'postcss-loader'
     ];
 
     if (extra) {
@@ -128,7 +130,7 @@ module.exports = {
         port: 4200,
         hot: isDev
     },
-    devtool: isDev ? 'source-map' : '',
+    devtool: isDev ? 'cheap-eval-source-map' : '',
     plugins: plugins(),
     module: {
         rules: [
