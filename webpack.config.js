@@ -13,15 +13,12 @@ const isProd = !isDev;
 const optimization = () => {
     const config = {
         splitChunks: {
-            chunks: 'all',
-        },
+            chunks: 'all'
+        }
     };
 
     if (isProd) {
-        config.minimizer = [
-            new OptimizeCssAssetWebpackPlugin(),
-            new TerserWebpackPlugin(),
-        ];
+        config.minimizer = [new OptimizeCssAssetWebpackPlugin(), new TerserWebpackPlugin()];
     }
 
     return config;
@@ -35,10 +32,10 @@ const cssLoaders = (extra) => {
             loader: MiniCssExtractPlugin.loader,
             options: {
                 hmr: isDev,
-                reloadAll: true,
-            },
+                reloadAll: true
+            }
         },
-        'css-loader',
+        'css-loader'
     ];
 
     if (extra) {
@@ -51,7 +48,7 @@ const cssLoaders = (extra) => {
 const babelOptions = (preset) => {
     const opts = {
         presets: ['@babel/preset-env'],
-        plugins: ['@babel/plugin-proposal-class-properties'],
+        plugins: ['@babel/plugin-proposal-class-properties']
     };
 
     if (preset) {
@@ -65,8 +62,8 @@ const jsLoaders = () => {
     const loaders = [
         {
             loader: 'babel-loader',
-            options: babelOptions(),
-        },
+            options: babelOptions()
+        }
     ];
 
     if (isDev) {
@@ -81,26 +78,30 @@ const plugins = () => {
         new HTMLWebpackPlugin({
             template: './index.html',
             minify: {
-                collapseWhitespace: isProd,
-            },
+                collapseWhitespace: isProd
+            }
         }),
         new CleanWebpackPlugin(),
-        // new CopyWebpackPlugin({
-        //     patterns: [
-        //         {
-        //             from: path.resolve(__dirname, 'src/favicon.ico'),
-        //             to: path.resolve(__dirname, 'dist'),
-        //         },
-        //     ],
-        // }),
-        new MiniCssExtractPlugin({
-            filename: filename('css'),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'src/static'),
+                    to: path.resolve(__dirname, 'dist/static')
+                },
+                {
+                    from: path.resolve(__dirname, 'src/assets/img'),
+                    to: path.resolve(__dirname, 'dist/assets/img')
+                }
+            ]
         }),
+        new MiniCssExtractPlugin({
+            filename: filename('css')
+        })
     ];
 
-    if (isProd) {
-        base.push(new BundleAnalyzerPlugin());
-    }
+    // if (isProd) {
+    //     base.push(new BundleAnalyzerPlugin());
+    // }
 
     return base;
 };
@@ -109,23 +110,23 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     entry: {
-        main: ['@babel/polyfill', './index.jsx'],
+        main: ['@babel/polyfill', './index.js']
     },
     output: {
         filename: filename('js'),
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist')
     },
     resolve: {
         extensions: ['.js', '.json', '.png'],
         alias: {
             '@models': path.resolve(__dirname, 'src/models'),
-            '@': path.resolve(__dirname, 'src'),
-        },
+            '@': path.resolve(__dirname, 'src')
+        }
     },
     optimization: optimization(),
     devServer: {
         port: 4200,
-        hot: isDev,
+        hot: isDev
     },
     devtool: isDev ? 'source-map' : '',
     plugins: plugins(),
@@ -133,53 +134,53 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: cssLoaders(),
+                use: cssLoaders()
             },
-            // {
-            //     test: /\.less$/,
-            //     use: cssLoaders('less-loader'),
-            // },
+            {
+                test: /\.less$/,
+                use: cssLoaders('less-loader')
+            },
             {
                 test: /\.s[ac]ss$/,
-                use: cssLoaders('sass-loader'),
+                use: cssLoaders('sass-loader')
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,
-                use: ['file-loader'],
+                use: ['file-loader']
             },
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
-                use: ['file-loader'],
+                use: ['file-loader']
             },
             {
                 test: /\.xml$/,
-                use: ['xml-loader'],
+                use: ['xml-loader']
             },
             {
                 test: /\.csv$/,
-                use: ['csv-loader'],
+                use: ['csv-loader']
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: jsLoaders(),
+                use: jsLoaders()
             },
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 loader: {
                     loader: 'babel-loader',
-                    options: babelOptions('@babel/preset-typescript'),
-                },
+                    options: babelOptions('@babel/preset-typescript')
+                }
             },
             {
                 test: /\.jsx$/,
                 exclude: /node_modules/,
                 loader: {
                     loader: 'babel-loader',
-                    options: babelOptions('@babel/preset-react'),
-                },
-            },
-        ],
-    },
+                    options: babelOptions('@babel/preset-react')
+                }
+            }
+        ]
+    }
 };
