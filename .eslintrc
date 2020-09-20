@@ -1,22 +1,17 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
+    "extends": ["airbnb", "prettier"],
+    "plugins": ["prettier"],
+    "rules": {
+        "prettier/prettier": "warn",
+        "no-unused-vars": "warn",
+        "no-console": "warn",
+        "func-names": "off",
+        "react/jsx-filename-extension": [1, {
+            "extensions": [".js", ".jsx"]
+        }]
     },
     "env": {
-        "es6": true
-    },
-    "rules": {
-        "no-var": "error",
-        "semi": "error",
-        "indent": "error",
-        "no-multi-spaces": "error",
-        "space-in-parens": "error",
-        "no-multiple-empty-lines": "error",
-        "prefer-const": "error",
-        "no-use-before-define": "error"
+        "browser": true,
+        "node": true
     }
 }
